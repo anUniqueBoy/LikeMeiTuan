@@ -1,88 +1,97 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="header-search">
-        <Button type="info"  @click="jumpHome">返回首页</Button>
+      <div class="header-left">
+        <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
+        <p style="margin-right:20px">西安</p>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
-      <div class="header-people" @click="jumpPeosonalCenter">
-        <div style="width:30px;height:30px;">
-          <img src="../assets/personCenter.png" alt="" style="width:100%;height:100%;vertical-align:middle">
-        </div>
-        <p style="margin-left:5px;color:#fff">个人中心</p>
-      </div>
+      <ul class="header-right">
+        <li><router-link to="/MyOrder" style="color:#999999;"><span>我的订单</span></router-link></li>
+        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>账户设置</span></router-link></li>
+      </ul>
+    </div>
+    <div class="search">
+      <Row>
+        <Col span="6">
+          <div class="search-title">
+            <span class="search-meishi">美食</span>
+            <span style="font-size:16px;"> 店铺商品</span>
+          </div>
+        </Col>
+      </Row>
     </div>
     <div class="content">
-        <Row :gutter="24">
-            <Col span="11">
-                <div class="left-content">
-                    <Carousel loop v-model="value">
-                    <CarouselItem>
-                        <div class="demo-carousel">
-                            <img src="../assets/timg.jpg" class="img-style" alt="">
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div class="demo-carousel">
-                            <img src="../assets/timg (1).jpg" class="img-style" alt="">
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div class="demo-carousel">
-                            <img src="../assets/timg (2).jpg" class="img-style" alt="">
-                        </div>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <div class="demo-carousel">
-                            <img src="../assets/timg (3).jpg" class="img-style" alt="">
-                        </div>
-                    </CarouselItem>
-                    </Carousel>
-                </div>
-            </Col>
-            <Col span="13">
-                <div class="right-content">
-                    <ul class="right-top">
-                        <li style="margin:10px 0;color:blue">
-                            <span>铁板培根饭</span>
-                        </li>
-                        <li>
-                            <span>价格：</span>
-                            <b style="color:#e4393c">￥20</b>
-                        </li>
-                        <li>
-                            <span>月售：</span>
-                            <span style="color:gray">42</span>
-                        </li>
-                        <li>
-                            <span>描述：</span>
-                            <span style="color:gray">培根+米饭+萝卜+青菜</span>
-                        </li>
-                        <li>
-                            <span>主要原料：</span>
-                            <span style="color:gray">培根</span>
-                        </li>
-                        <li>
-                            <span>用户评分：</span>
-                            <Rate show-text disabled allow-half v-model="valueHalf">
-                                <span style="color: #f5a623;font-size:16px;">{{ valueHalf }}</span>
-                            </Rate>
-                        </li>
-                        <li>
-                            <span>用户评价：</span>
-                        </li>
-                    </ul>
-                    <div class="comment">
-                      <span class="tag-span"  v-for="(item,index) in comment" :key="index" @click="changeActive(index)" :class="item.isActive?'tag-click':''"> 
-                        {{item.name}}
-                      </span>
-                    </div>
-                    <Table :show-header="false" height="140" :columns="commentColumns" :data="commentData"></Table>
-                    <div class="button">
-                      <Button type="success" long @click="jumpOrder">立即下单</Button>
-                    </div>
-                </div>
-            </Col>
+      <div class="store-style">
+        <Row>
+          <Col span="16">
+            <ul class="text-store">
+              <li style="font-size:30px;">{{name}}</li>
+              <li class="border-li">
+                <Rate show-text disabled allow-half v-model="valueHalf">
+                  <span class="font-second">{{valueHalf}}分</span>
+                  <span>人均{{price}}</span>
+                </Rate>
+              </li>
+              <li>地址：{{address}}</li>
+              <li>电话 ：{{phone}}</li>
+              <li class="border-li">营业时间：{{openTime}}</li>
+              <li>{{description}}</li>
+            </ul>
+          </Col>
+          <Col span="8">
+            <div class="right-content">
+              <Carousel loop v-model="value">
+                <CarouselItem>
+                  <div class="demo-carousel">
+                    <img src="../assets/tanyu.png" class="img-style" alt="">
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div class="demo-carousel">
+                    <img src="../assets/tanyu.png" class="img-style" alt="">
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div class="demo-carousel">
+                    <img src="../assets/tanyu.png" class="img-style" alt="">
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div class="demo-carousel">
+                    <img src="../assets/tanyu.png" class="img-style" alt="">
+                  </div>
+                </CarouselItem>
+              </Carousel>
+            </div>
+          </Col>
         </Row>
+      </div>
+      <div class="tuangou-style">
+        <h1 class="h-color">商家团购及优惠</h1>
+        <div class="youhui-item">
+          <h2 class="h-color">2 款堂食优惠</h2>
+          <div v-for="(item,index) in tuangou" :key="index" class="box">
+            <div class="item-box" @click="jumpMoreDetail">
+              <img src="../assets/tuangou.png" alt="" width="120px" height="100px">
+              <div style="margin-left:20px;">
+                <div>
+                  <p style="font-size:16px;color:#000;">{{item.title}}</p>
+                  <p style="text-align:left;">已售 {{item.number}}</p>
+                </div>
+                <div style="text-align:left;margin-top:22px">
+                  <span style="font-size:25px;color:#FF6800;">￥ {{item.price}}</span>
+                  <span>&nbsp;&nbsp;&nbsp;门店价: ￥ {{item.menPrice}}</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <Button type="warning" size="large" shape="circle">立即抢购</Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -92,67 +101,35 @@ export default {
   name: 'Detail',
   data () {
     return {
+      search: '',
       value: 0,
-      valueHalf: 4.8,
-      comment: [
+      name: '探鱼（Cityon熙地港店）',
+      valueHalf: 3.9,
+      price: 79,
+      address: '未央区未央路Cityon熙地港店5层',
+      phone: '1882978242',
+      openTime: '周一至周五10：00-22：00',
+      description:  '提供wifi',
+      tuangou:[
         {
-          name: '全部(30)',
-          isActive: true
+          title:'2人套餐A，提供免费wifi',
+          number: '234',
+          price: '178',
+          menPrice: '235'
         },
         {
-          name: '推荐(20)',
-          isActive: false
-        },
-        {
-          name: '吐槽(1)',
-          isActive: false
-        }
-      ],
-      commentColumns:[
-        {
-          title: 'describe',
-          key: 'describe'
-        }
-      ],
-      commentData:[
-        {
-          describe: '味道还不错，推荐哦哦'
-        },
-        {
-          describe: '量很足'
-        },
-        {
-          describe: '很满意'
-        },
-        {
-          describe: '味道还不错，推荐哦哦'
-        },
-        {
-          describe: '味道还不错，推荐哦哦'
+          title:'2人套餐B，提供免费wifi',
+          number: '23',
+          price: '183',
+          menPrice: '298'
         }
       ],
     }
   },
   methods: {
-    jumpPeosonalCenter() {
-      this.$router.push({ name: 'PersonalCenter' });
+    jumpMoreDetail() {
+      this.$router.push({ name: 'MoreDetail' });
     },
-    jumpHome() {
-      this.$router.push({ name: 'Home' });
-    },
-    jumpOrder() {
-      this.$router.push({ name: 'MyOrder' });
-    },
-    changeActive(index) {
-      for (let i in this.comment) {
-        let item = Number(i)
-        if (item === index) {
-          this.comment[item].isActive = true
-        }else {
-          this.comment[item].isActive = false
-        }
-      }
-    }
   }
 }
 </script>
@@ -161,70 +138,108 @@ export default {
 <style scoped>
   /* 外层大背景图的样式 */
   .container{
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     left: 0;
   }
   .header{
     width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: #545051;
-    /* background: url(../assets/bgheader3.png) no-repeat;
-    background-size: 100% 100%; */
+    height: 40px;
+    line-height: 40px;
+    background-color: #F8F8F8;
     display: flex;
     justify-content: space-between;
   }
-  .header-search{
+  .header-left{
     margin-left:40px;
+    display: flex;
+    justify-content: space-between;
   }
-  .header-people{
+  .header-right{
     margin-right:40px;
     display: flex;
     justify-content: center;
   }
-  .header-people:hover{
-    cursor: pointer;
+  .header-right li{
+    list-style: none;
+    margin: 0 10px;
+  }
+  .header-right li:hover{
+    background-color: #F8F8F8;
+  }
+  .header-right li span:hover{
+    color:#31BBAC;
+  }
+  .search{
+    padding: 20px;
+    border: 1px solid #fff;
+    box-shadow: 10px 10px 5px #EBEBEB;
+  }
+  .search-title{
+    text-align: left;
+    padding-left: 80px;
+  }
+  .search-meishi{
+    color:#31BBAC;
+    font-size:30px;
+    font-weight: bold;
+  }
+  .header-search{
+    display: flex;
+    justify-content: flex-start;
+    margin-left:50px;
+    margin-top: 10px;
   }
   .content{
-    margin: 20px;
-    height: 100%;
+    background-color: #F8F8F8;
+    padding: 20px 80px;
+    color: #66667F;
   }
-  .right-content{
+  .store-style, .youhui-item{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 5px #EBEBEB;
+  }
+  .text-store{
     text-align: left;
-    font-size: 20px;
-    height:28px;
-    line-height: 40px;
+    font-size: 15px;
   }
-  .right-top li{
-    list-style: none;
+  .text-store li{
+    margin:10px 0;
+  }
+  .border-li{
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom:10px;
   }
   .img-style{
-    width: 100%;
-    height: 565px;
+    width:100%;
+    height:100%;
   }
-  .tag-span{
-    text-align: center;
-    display: inline-block;
-    padding: 0 10px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    border-radius: 5px;
+  /* h1,h2的字体样式 */
+  .h-color{
+    color:#000;
+    text-align: left;
+  }
+  .tuangou-style{
+    margin-top:20px;
+  }
+  .box:last-child{
+    border-bottom: none;
+  }
+  .box{
     display: flex;
-    align-self:flex-start;
+    justify-content: space-between;
+    align-items:center;
+    padding-right:20px;
+    padding: 20px 0;
+    border-bottom:1px solid #ddd;
   }
-  .tag-click{
-    background-color: #2d8cf0;
-    color: #fff;
-  }
-  .comment{
+  .item-box{
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .button{
-    margin:20px 0px;
+    justify-content: flex-start;
+    cursor: pointer;
   }
 </style>

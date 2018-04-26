@@ -1,32 +1,49 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="header-search">
-        <Button type="info"  @click="jumpHome">返回首页</Button>
+      <div class="header-left">
+        <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
+        <p style="margin-right:20px">西安</p>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
-      <div class="header-people" @click="jumpPeosonalCenter">
-        <div style="width:30px;height:30px;">
-          <img src="../assets/personCenter.png" alt="" style="width:100%;height:100%;vertical-align:middle">
-        </div>
-        <p style="margin-left:5px;color:#fff">个人中心</p>
-      </div>
+      <ul class="header-right">
+        <li><router-link to="/MyOrder" style="color:#999999;"><span>我的订单</span></router-link></li>
+        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>账户设置</span></router-link></li>
+      </ul>
+    </div>
+    <div class="search">
+      <Row>
+        <Col span="6">
+          <div class="search-title">
+            <span class="search-meishi">美食</span>
+            <span style="font-size:16px;"> 我的订单</span>
+          </div>
+        </Col>
+      </Row>
     </div>
     <div class="content">
-      <Form :model="formItem" :label-width="80">
-        <FormItem label="姓名：">
-          <Input v-model="formItem.name" placeholder="请输入姓名"></Input>
-        </FormItem>
-        <FormItem label="联系方式：">
-          <Input v-model="formItem.phone" placeholder="请输入电话号码"></Input>
-        </FormItem>
-        <FormItem label="联系地址：">
-          <Input v-model="formItem.address" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入地址"></Input>
-        </FormItem>
-        <FormItem label="留言：">
-          <Input v-model="formItem.message" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入留言"></Input>
-        </FormItem>
-        <Button type="info" long  @click="Order">确定下单</Button>
-      </Form>
+      <div class="store-style">
+        <Tabs :animated="false">
+          <TabPane label="全部订单">
+            <ul v-for="(item, index) in orderList" :key="index" @click="jumpOrderDetail" class="order-item">
+              <li class="img-item">
+                <img src="../assets/tuangou.png" alt="" style="width:100px;height:100px;vertical-align:middle">
+                <div class="title-item">
+                  <p style="font-size:16px;">{{item.title}}</p>
+                  <p>数量：{{item.number}}</p>
+                </div>
+              </li>
+              <li>总价：￥{{item.price}}</li>
+              <li>{{item.state}}</li>
+            </ul>
+          </TabPane>
+          <TabPane label="待付款">标签二的内容</TabPane>
+          <TabPane label="待使用">标签三的内容</TabPane>
+          <TabPane label="待评价">标签三的内容</TabPane>
+          <TabPane label="已退款/已取消">标签三的内容</TabPane>
+        </Tabs>
+      </div>
     </div>
   </div>
 </template>
@@ -36,33 +53,32 @@ export default {
   name: 'MyOrder',
   data () {
     return {
-      formItem: {
-        name: '',
-        phone: '',
-        address: '',
-        message: '',
-      }
+      orderList: [
+        {
+          title: '探鱼2人餐',
+          number: '1',
+          price: '178',
+          state: '待付款'
+        },
+        {
+          title: '探鱼2人餐',
+          number: '1',
+          price: '178',
+          state: '待付款'
+        },
+        {
+          title: '探鱼2人餐',
+          number: '1',
+          price: '178',
+          state: '待付款'
+        }
+      ],
     }
   },
   methods: {
-    jumpPeosonalCenter() {
-      this.$router.push({ name: 'PersonalCenter' });
+    jumpOrderDetail() {
+      this.$router.push({ name: 'OrderDetail' });
     },
-    jumpHome() {
-      this.$router.push({ name: 'Home' });
-    },
-    Order() {
-      if (this.formItem.name === '') {
-        this.$Message.warning('请输入姓名')
-      } else if (this.formItem.phone === '') {
-        this.$Message.warning('请输入电话号码')
-      } else if (this.formItem.address === '') {
-        this.$Message.warning('请输入地址')
-      } else {
-        this.$Message.success('下单成功，请在个人中心页面查看')
-        this.$router.push({ name: 'PersonalCenter' })
-      }
-    }
   }
 }
 </script>
@@ -78,26 +94,81 @@ export default {
   }
   .header{
     width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: #545051;
-    /* background: url(../assets/bgheader3.png) no-repeat;
-    background-size: 100% 100%; */
+    height: 40px;
+    line-height: 40px;
+    background-color: #F8F8F8;
     display: flex;
     justify-content: space-between;
   }
-  .header-search{
+  .header-left{
     margin-left:40px;
+    display: flex;
+    justify-content: space-between;
   }
-  .header-people{
+  .header-right{
     margin-right:40px;
     display: flex;
     justify-content: center;
   }
-  .header-people:hover{
-    cursor: pointer;
+  .header-right li{
+    list-style: none;
+    margin: 0 10px;
+  }
+  .header-right li:hover{
+    background-color: #F8F8F8;
+  }
+  .header-right li span:hover{
+    color:#31BBAC;
+  }
+  .search{
+    padding: 20px;
+    border: 1px solid #fff;
+    box-shadow: 10px 10px 5px #EBEBEB;
+  }
+  .search-title{
+    text-align: left;
+    padding-left: 80px;
+  }
+  .search-meishi{
+    color:#31BBAC;
+    font-size:30px;
+    font-weight: bold;
+  }
+  .header-search{
+    display: flex;
+    justify-content: flex-start;
+    margin-left:50px;
+    margin-top: 10px;
   }
   .content{
-    margin: 10px;
+    background-color: #F8F8F8;
+    padding: 20px 150px;
+    color: #666;
+  }
+  .store-style{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 5px #EBEBEB;
+  }
+  .order-item{
+    padding-right:200px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .img-item{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .title-item{
+    margin-left:20px;
+    text-align: left;
+  }
+  .title-item p{
+    margin:10px;
   }
 </style>

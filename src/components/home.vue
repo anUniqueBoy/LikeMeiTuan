@@ -8,9 +8,7 @@
         <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
       <ul class="header-right">
-        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>我的订单</span></router-link></li>
-        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>我的评价</span></router-link></li>
-        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>我的收藏</span></router-link></li>
+        <li><router-link to="/MyOrder" style="color:#999999;"><span>我的订单</span></router-link></li>
         <li><router-link to="/PersonalCenter" style="color:#999999;"><span>账户设置</span></router-link></li>
       </ul>
     </div>

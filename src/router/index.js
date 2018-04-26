@@ -7,6 +7,11 @@ import Home from '@/components/home'
 import MyOrder from '@/components/my-order'
 import PersonalCenter from '@/components/personal-center'
 import Detail from '@/components/detail'
+import MoreDetail from '@/components/more-detail'
+import Buy from '@/components/buy'
+import OrderDetail from '@/components/order-detail'
+import ChangePwd from '@/components/change-pwd'
+
 
 Vue.use(Router)
 
@@ -64,9 +69,41 @@ export default new Router({
       path: '/Detail',
       name: 'Detail',
       meta: {
-        title: '商品详情',
+        title: '店铺详情',
       },
       component: Detail
+    },
+    {
+      path: '/MoreDetail',
+      name: 'MoreDetail',
+      meta: {
+        title: '商品详情',
+      },
+      component: MoreDetail
+    },
+    {
+      path: '/Buy',
+      name: 'Buy',
+      meta: {
+        title: '购买详情',
+      },
+      component: Buy
+    },
+    {
+      path: '/OrderDetail',
+      name: 'OrderDetail',
+      meta: {
+        title: '订单详情',
+      },
+      component: OrderDetail
+    },
+    {
+      path: '/ChangePwd',
+      name: 'ChangePwd',
+      meta: {
+        title: '修改密码',
+      },
+      component: ChangePwd
     },
   ]
 })

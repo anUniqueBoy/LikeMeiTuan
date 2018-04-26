@@ -1,172 +1,100 @@
 <template>
   <div class="container">
     <div class="header">
-      <div class="header-search">
-        <Button type="info"  @click="jumpHome">返回首页</Button>
+      <div class="header-left">
+        <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
+        <p style="margin-right:20px">西安</p>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
-      <div class="header-people" @click="jumpPeosonalCenter">
-        <div style="width:30px;height:30px;">
-          <img src="../assets/personCenter.png" alt="" style="width:100%;height:100%;vertical-align:middle">
-        </div>
-        <p style="margin-left:5px;color:#fff">个人中心</p>
-      </div>
+      <ul class="header-right">
+        <li><router-link to="/MyOrder" style="color:#999999;"><span>我的订单</span></router-link></li>
+        <li><router-link to="/PersonalCenter" style="color:#999999;"><span>账户设置</span></router-link></li>
+      </ul>
+    </div>
+    <div class="search">
+      <Row>
+        <Col span="6">
+          <div class="search-title">
+            <span class="search-meishi">美食</span>
+            <span style="font-size:16px;"> 账户设置</span>
+          </div>
+        </Col>
+      </Row>
     </div>
     <div class="content">
-      <div class="content-header">
-        <div class="right-content">
-          <img src="../assets/people.png" alt="" style="width:70px;height:70px;">
-          <p class="text-style">修改个人信息</p>
+      <ul class="store-style">
+        <li>
+          <p class="setting-title">昵称</p>
+          <p class="setting-content">{{name}}</p>
+          <div class="setting-button">
+            <Button type="ghost" shape="circle" size="large" @click="shownameModel">修改</Button>
+          </div>
+        </li>
+        <li>
+          <p class="setting-title">生日</p>
+          <p class="setting-content">{{birthday}}</p>
+          <div class="setting-button">
+            <Button type="ghost" shape="circle" size="large" @click="showdateModel">修改</Button>
+          </div>
+        </li>
+        <li>
+          <p class="setting-title">换绑手机</p>
+          <p class="setting-content">{{phone}}</p>
+          <div class="setting-button">
+            <Button type="ghost" shape="circle" size="large" @click="showphoneModel">换绑</Button>
+          </div>
+        </li>
+        <li>
+          <p class="setting-title">登录密码</p>
+          <p class="setting-content">安全强度：{{state}}</p>
+          <div class="setting-button">
+            <Button type="ghost" shape="circle" size="large" @click="jumpChangePwd">修改</Button>
+          </div>
+        </li>
+      </ul>
+      <Modal v-model="modal1" width="360">
+        <p slot="header">修改昵称</p>
+        <div style="text-align:center">
+            <Form :model="formItem" :label-width="80">
+              <FormItem label="输入昵称">
+                <Input v-model="formItem.name" placeholder="请输入昵称"></Input>
+              </FormItem>
+            </Form>
         </div>
-        <div class="left-content">
-          <p class="text-style">退出登录</p>
+        <div slot="footer">
+            <Button type="ghost" size="large" @click="cancle">取消</Button>
+            <Button type="success" size="large" @click="changeName">确定</Button>
         </div>
-      </div>
-      <div class="content-body">
-        <Tabs value="name1">
-          <TabPane label="所有订单" name="name1">
-            <ul class="order-item">
-              <li>
-                <img src="../assets/timg.jpg" alt="" style="width:90px;height:90px;vertical-align:middle">
-              </li>
-              <li>
-                <p>铁板牛肉饭</p>
-              </li>
-              <li>
-                <p>￥ 20</p>
-              </li>
-              <li>
-                <p>2018-04-11 09:20:34</p>
-              </li>
-              <li>
-                <p><Button type="warning">删除订单</Button></p>
-              </li>
-            </ul>
-            <ul class="order-item">
-              <li>
-                <img src="../assets/timg.jpg" alt="" style="width:90px;height:90px;vertical-align:middle">
-              </li>
-              <li>
-                <p>铁板牛肉饭</p>
-              </li>
-              <li>
-                <p>￥ 20</p>
-              </li>
-              <li>
-                <p>2018-04-11 09:20:34</p>
-              </li>
-              <li>
-                <p><Button type="warning">删除订单</Button></p>
-              </li>
-            </ul>
-            <ul class="order-item">
-              <li>
-                <img src="../assets/timg.jpg" alt="" style="width:90px;height:90px;vertical-align:middle">
-              </li>
-              <li>
-                <p>铁板牛肉饭</p>
-              </li>
-              <li>
-                <p>￥ 20</p>
-              </li>
-              <li>
-                <p>2018-04-11 09:20:34</p>
-              </li>
-              <li>
-                <p><Button type="warning">删除订单</Button></p>
-              </li>
-            </ul>
-            <ul class="order-item">
-              <li>
-                <img src="../assets/timg.jpg" alt="" style="width:90px;height:90px;vertical-align:middle">
-              </li>
-              <li>
-                <p>铁板牛肉饭</p>
-              </li>
-              <li>
-                <p>￥ 20</p>
-              </li>
-              <li>
-                <p>2018-04-11 09:20:34</p>
-              </li>
-              <li>
-                <p><Button type="warning">删除订单</Button></p>
-              </li>
-            </ul>
-          </TabPane>
-          <TabPane label="待收货" name="name2">
-            <ul class="order-item">
-              <li>
-                <img src="../assets/timg.jpg" alt="" style="width:90px;height:90px;vertical-align:middle">
-              </li>
-              <li>
-                <p>铁板牛肉饭</p>
-              </li>
-              <li>
-                <p>￥ 20</p>
-              </li>
-              <li>
-                <p>2018-04-11 09:20:34</p>
-              </li>
-              <li>
-                <p><Button type="primary">确认收货</Button></p>
-              </li>
-            </ul>
-          </TabPane>
-          <TabPane label="已收货" name="name3">标签三的内容</TabPane>
-          <TabPane label="待评价" name="name4">标签三的内容</TabPane>
-        </Tabs>
-      </div>
-      <div class="footer">
-        <div class="footer-font">
-          <p>根据浏览猜我喜欢</p>
+      </Modal>
+      <Modal v-model="modal2" width="360">
+        <p slot="header">修改生日</p>
+        <div style="text-align:center">
+            <Form :model="formItem" :label-width="100">
+              <FormItem label="请选择出生日期">
+                <DatePicker type="date" placeholder="请选择日期" v-model="formItem.date"></DatePicker>
+              </FormItem>
+            </Form>
         </div>
-        <Row :gutter="24">
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/timg.jpg" alt="">
-              </div>
-              <div style="text-align:left">
-                <span class="font-span">￥20</span>
-                <p class="font-p">铁板培根饭</p>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item">
-              <div>
-                <img class="img-size" src="../assets/timg.jpg" alt="">
-              </div>
-              <div style="text-align:left">
-                <span class="font-span">￥20</span>
-                <p class="font-p">铁板培根饭</p>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item">
-              <div>
-                <img class="img-size" src="../assets/timg.jpg" alt="">
-              </div>
-              <div style="text-align:left">
-                <span class="font-span">￥20</span>
-                <p class="font-p">铁板培根饭</p>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item">
-              <div>
-                <img class="img-size" src="../assets/timg.jpg" alt="">
-              </div>
-              <div style="text-align:left">
-                <span class="font-span">￥20</span>
-                <p class="font-p">铁板培根饭</p>
-              </div>
-            </div>
-          </Col>
-      </Row>
-      </div>
+        <div slot="footer">
+            <Button type="ghost" size="large" @click="cancle">取消</Button>
+            <Button type="success" size="large" @click="changeDate">确定</Button>
+        </div>
+      </Modal>
+      <Modal v-model="modal3" width="360">
+        <p slot="header">换绑手机</p>
+        <div style="text-align:center">
+            <Form :model="formItem" :label-width="80">
+              <FormItem label="输入手机号">
+                <Input v-model="formItem.phone" placeholder="请输入手机号"></Input>
+              </FormItem>
+            </Form>
+        </div>
+        <div slot="footer">
+            <Button type="ghost" size="large" @click="cancle">取消</Button>
+            <Button type="success" size="large" @click="changePhone">确定</Button>
+        </div>
+      </Modal>
     </div>
   </div>
 </template>
@@ -176,15 +104,56 @@ export default {
   name: 'PersonalCenter',
   data () {
     return {
+      name: 'chusdhw89w',
+      birthday: '1994-11-17',
+      phone: '188****8245',
+      state: '强',
+      modal1: false,
+      modal2: false,
+      modal3: false,
+      formItem: {
+        name: '',
+        phont: '',
+        date: ''
+      }
     }
   },
   methods: {
-    jumpPeosonalCenter() {
-      this.$router.push({ name: 'PersonalCenter' });
+    jumpChangePwd() {
+      this.$router.push({ name: 'ChangePwd' });
     },
-    jumpHome() {
-      this.$router.push({ name: 'Home' });
+    shownameModel() {
+      this.modal1 = true;
     },
+    showdateModel() {
+      this.modal2 = true;
+    },
+    showphoneModel() {
+      this.modal3 = true;
+    },
+    cancle() {
+      this.modal1 = false;
+      this.formItem.name = '';
+      this.modal3 = false;
+      this.formItem.phone = '';
+      this.modal2 = false;
+      this.formItem.date = '';
+    },
+    changeName() {
+      this.modal1 = false;
+      this.name = this.formItem.name;
+      this.formItem.name = '';
+    },
+    changePhone() {
+      this.modal3 = false;
+      this.phone = this.formItem.phone;
+      this.formItem.phone = '';
+    },
+    changeDate() {
+      this.modal2 = false;
+      this.birthday = this.formItem.date;
+      this.formItem.date = '';
+    }
   }
 }
 </script>
@@ -200,81 +169,88 @@ export default {
   }
   .header{
     width: 100%;
-    height: 60px;
-    line-height: 60px;
-    background-color: #545051;
-    /* background: url(../assets/bgheader3.png) no-repeat;
-    background-size: 100% 100%; */
+    height: 40px;
+    line-height: 40px;
+    background-color: #F8F8F8;
     display: flex;
     justify-content: space-between;
   }
-  .header-search{
+  .header-left{
     margin-left:40px;
+    display: flex;
+    justify-content: space-between;
   }
-  .header-people{
+  .header-right{
     margin-right:40px;
     display: flex;
     justify-content: center;
   }
-  .header-people:hover{
-    cursor: pointer;
+  .header-right li{
+    list-style: none;
+    margin: 0 10px;
+  }
+  .header-right li:hover{
+    background-color: #F8F8F8;
+  }
+  .header-right li span:hover{
+    color:#31BBAC;
+  }
+  .search{
+    padding: 20px;
+    border: 1px solid #fff;
+    box-shadow: 10px 10px 5px #EBEBEB;
+  }
+  .search-title{
+    text-align: left;
+    padding-left: 80px;
+  }
+  .search-meishi{
+    color:#31BBAC;
+    font-size:30px;
+    font-weight: bold;
+  }
+  .header-search{
+    display: flex;
+    justify-content: flex-start;
+    margin-left:50px;
+    margin-top: 10px;
   }
   .content{
+    background-color: #F8F8F8;
+    padding: 20px 150px;
+    color: #666;
   }
-  .content-header{
+  .store-style{
     border: 1px solid #ddd;
-    background-color: #F5F8FA;
-    height: 90px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 5px 5px 5px #EBEBEB;
+  }
+  .store-style li{
+    margin: 20px 0;
     display: flex;
-    align-items: center;
-    padding-left:200px;
+    justify-content: flex-start;
   }
-  .right-content{
-    display: flex;
-    align-items: center;
+  .setting-title{
+    text-align: right;
+    height:40px;
+    line-height: 40px;
+    font-size:20px;
+    width: 150px;
+    padding-right:30px;
+    border-right:1px solid #ddd;
   }
-  .left-content{
-    margin-left: 750px;
-  }
-  .text-style{
-    margin-left: 15px;
-    font-size: 18px;
-    color: #4395FF;
-  }
-  .content-body{
-    margin: 20px 50px;
-  }
-  .order-item{
-    display: flex;
-    justify-content: space-around;
-    align-items:center;
-  }
-  .order-item li{
-    list-style: none;
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  .footer{
-    border-top:1px solid #ddd;
-    padding: 10px 20px 0;
-  }
-  .img-size{
-    width: 100%;
-    height: 150px;
-  }
-  .font-p{
-    font-size: 20px;
-    padding:0 10px;
-    display: inline;
-  }
-  .font-span{
-    padding:0 10px;
-    font-size:22px;
-    color: #e4393c;
-  }
-  .footer-font{
+  .setting-content{
+    padding-left:30px;
+    height:40px;
+    line-height: 40px;
+    width:600px;
     text-align: left;
-    font-size: 18px;
-    margin-bottom: 10px;
+  }
+  .setting-button{
+    height:40px;
+    line-height: 40px;
+    text-align: right;
   }
 </style>

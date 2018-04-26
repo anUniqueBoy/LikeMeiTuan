@@ -47,8 +47,13 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { type: 'string', min: 6, max:12, message: '密码长度不能小于或大于12', trigger: 'blur' }
         ]
-      }
+      },
+      // marginRight: -500
+      marginRight: -screen.availWidth
     }
+  },
+  mounted(){
+    setInterval(this.scroll,100)
   },
   methods: {
     // 登录按钮
@@ -59,6 +64,14 @@ export default {
         } else {
         }
       })
+    },
+    scroll() {
+      if (this.marginRight < screen.availWidth) {
+        this.marginRight = this.marginRight + 20
+      } else {
+        this.marginRight = -screen.availWidth
+        this.marginRight = this.marginRight + 20
+      }
     }
   }
 }
