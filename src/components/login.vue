@@ -52,9 +52,6 @@ export default {
       marginRight: -screen.availWidth
     }
   },
-  mounted(){
-    setInterval(this.scroll,100)
-  },
   methods: {
     // 登录按钮
     handleSubmit(name) {
@@ -65,14 +62,6 @@ export default {
         }
       })
     },
-    scroll() {
-      if (this.marginRight < screen.availWidth) {
-        this.marginRight = this.marginRight + 20
-      } else {
-        this.marginRight = -screen.availWidth
-        this.marginRight = this.marginRight + 20
-      }
-    }
   }
 }
 </script>

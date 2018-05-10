@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "name":"探鱼（熙地港店）",
+        "grade":4,
+        "evaluate":2349,
+        "img":"../../static/img/tuangoudetail1.png",
+        "address":"未央路",
+        "price":20
+    },
+    {
+        "id": 1,
+        "name":"探鱼（熙地港店）",
+        "grade":4,
+        "evaluate":2349,
+        "img":"../../static/img/tuangoudetail1.png",
+        "address":"未央路",
+        "price":20
+    },
+    {
+        "id": 1,
+        "name":"探鱼（熙地港店）",
+        "grade":4,
+        "evaluate":2349,
+        "img":"../../static/img/tuangoudetail1.png",
+        "address":"未央路",
+        "price":20
+    }
+]

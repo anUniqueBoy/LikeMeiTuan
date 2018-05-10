@@ -67,128 +67,21 @@
         </li>
       </ul>
       <div class="show-container">
-        <Row :gutter="24">
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
+        <div class="item-container">
+          <div class="item" @click="jumpDetail" v-for="(item,index) in foodList" :key=index>
+            <div>
+              <img class="img-size" src="../assets/tanyu.png" alt="">
             </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
+            <div style="text-align:left">
+              <p class="font-first">{{item.name}}</p>
+              <Rate show-text disabled allow-half v-model="valueHalf">
+                <span class="font-second">{{item.evaluate}}个评价</span>
+              </Rate>
+              <p class="font-second">{{item.address}}</p>
+              <span class="font-price">￥{{item.price}}</span>
             </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <div class="footer">
           <Page :total="100" show-total></Page>
         </div>
@@ -200,128 +93,21 @@
         <span style="font-size:15px">为你挑选最适合的</span>
       </div>
       <div class="show-container">
-        <Row :gutter="24">
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
+        <div class="item-container">
+          <div class="item" @click="jumpDetail" v-for="(item,index) in foodList" :key=index>
+            <div>
+              <img class="img-size" :src="item.img" alt="">
             </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
+            <div style="text-align:left">
+              <p class="font-first">{{item.name}}</p>
+              <Rate show-text disabled allow-half v-model="valueHalf">
+                <span class="font-second">{{item.evaluate}}个评价</span>
+              </Rate>
+              <p class="font-second">{{item.address}}</p>
+              <span class="font-price">￥{{item.price}}</span>
             </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-          <Col span="6">
-            <div class="item" @click="jumpDetail">
-              <div>
-                <img class="img-size" src="../assets/tanyu.png" alt="">
-              </div>
-              <div style="text-align:left">
-                <p class="font-first">探鱼（熙地港店）</p>
-                <Rate show-text disabled allow-half v-model="valueHalf">
-                  <span class="font-second">2056个评价</span>
-                </Rate>
-                <p class="font-second">未央路</p>
-                <span class="font-price">￥20</span>
-              </div>
-            </div>
-          </Col>
-        </Row>
+          </div>
+        </div>
         <div class="footer">
           <Page :total="100" show-total></Page>
         </div>
@@ -331,6 +117,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Home',
   data () {
@@ -383,9 +170,11 @@ export default {
           isActive: false
         },
       ],
+      foodList:''
     }
   },
   mounted() {
+    this.getLikeList()
   },
   methods: {
     jumpPeosonalCenter() {
@@ -414,7 +203,18 @@ export default {
           this.selectItem[item].isActive = false
         }
       }
-    }
+    },
+    // 获取json数据
+    getLikeList() {
+      axios.get('../../../static/json/get_like.json')
+        .then((response) => {
+          this.foodList = response.data
+          console.log(this.foodList)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
   }
 }
 </script>
@@ -567,8 +367,14 @@ export default {
     color: #FF6C0B;
   }
   .item {
-    margin-bottom: 20px;
+    width:260px;
+    margin:12px;
     cursor: pointer;
+  }
+  .item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
   .footer{
     text-align: right;
