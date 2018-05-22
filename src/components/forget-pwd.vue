@@ -11,11 +11,19 @@
           <h2 class="login-h2">忘记密码</h2>
           <div class="login-form">
             <Form :model="formItem" ref="formItem" :rules="ruleItem" :label-width="80">
-              <FormItem prop="phone" label="用户名：">
-                <Input type="text" v-model="formItem.phone" size="large" placeholder="请输入手机号"></Input>
+              <FormItem prop="phone" label="手机号：">
+                <Row>
+                  <Col span="16">
+                  <Input type="text" v-model="formItem.phone" size="large" placeholder="请输入手机号"></Input>
+                  </Col>
+                  <Col span="8">
+                  <Button type="ghost" v-if="showButton" @click="changeTime">获取验证码</Button>
+                  <p v-else>{{time}}s</p>
+                  </Col>
+                </Row>
               </FormItem>
-              <FormItem prop="password" label="旧密码：">
-                <Input type="password" v-model="formItem.password" size="large" placeholder="请输入密码"></Input>
+              <FormItem prop="code" label="验证码：">
+                <Input type="text" v-model="formItem.code" size="large" placeholder="请输入手机验证码"></Input>
               </FormItem>
               <FormItem prop="newPassword" label="新密码：">
                 <Input type="password" v-model="formItem.newPassword" size="large" placeholder="请输入密码"></Input>
@@ -34,21 +42,22 @@ export default {
   name: 'ForgetPwd',
   data () {
     return {
+      time: 60,
+      showButton: true,
       formItem: {
         phone: '',
-        password: '',
+        code: '',
         newPassword: '',
       },
       ruleItem: {
         phone: [
           { required: true, message: '请输入手机号', trigger: 'blur' }
         ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
-          { type: 'string', min: 6, max:12, message: '密码长度不能小于或大于12', trigger: 'blur' }
+        code: [
+          { required: true, message: '请输入手机验证码', trigger: 'blur' },
         ],
         newPassword: [
-          { required: true, message: '请输入密码', trigger: 'blur' },
+          { required: true, message: '请输入新密码', trigger: 'blur' },
           { type: 'string', min: 6, max:12, message: '密码长度不能小于或大于12', trigger: 'blur' }
         ]
       }
@@ -63,6 +72,22 @@ export default {
         } else {
         }
       })
+    },
+    changeTime() {
+      if (this.formItem.phone === '') {
+        this.$Message.warning('请输入手机号');
+      }else{
+        this.showButton = false;
+        let timer = setInterval(
+          ()=>{
+            this.time = this.time - 1;
+            if(this.time === 0){
+              this.showButton = true;
+              clearInterval(timer);
+              this.time = 60;
+            }
+          },1000)
+      }
     }
   }
 }

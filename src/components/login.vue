@@ -11,7 +11,7 @@
             <h2 class="login-h2">欢迎登录</h2>
             <div class="login-form">
               <Form :model="formItem" ref="formItem" :rules="ruleItem" :label-width="80">
-                <FormItem prop="phone" label="用户名：">
+                <FormItem prop="phone" label="手机号：">
                   <Input type="text" v-model="formItem.phone" size="large" placeholder="请输入手机号"></Input>
                 </FormItem>
                 <FormItem prop="password" label="密码：">
@@ -57,7 +57,8 @@ export default {
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$router.push({ name: 'Home' });
+          window.localStorage.setItem('phone',this.formItem.phone);
+          this.$router.push({ name: 'ChooseCity' });
         } else {
         }
       })

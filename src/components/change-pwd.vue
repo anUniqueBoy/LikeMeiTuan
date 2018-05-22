@@ -11,7 +11,7 @@
           <h2 class="login-h2">修改密码</h2>
           <div class="login-form">
             <Form :model="formItem" ref="formItem" :rules="ruleItem" :label-width="80">
-              <FormItem prop="phone" label="用户名：">
+              <FormItem prop="phone" label="手机号：">
                 <Input type="text" v-model="formItem.phone" size="large" placeholder="请输入手机号"></Input>
               </FormItem>
               <FormItem prop="password" label="旧密码：">

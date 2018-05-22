@@ -3,8 +3,8 @@
     <div class="header">
       <div class="header-left">
         <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
-        <p style="margin-right:20px">西安</p>
-        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <p style="margin-right:20px">{{text}}</p>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">{{phone}}</router-link>
         <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
       <ul class="header-right">
@@ -87,7 +87,7 @@
               </div>
             </div>
             <div>
-              <Button type="warning" size="large" shape="circle">立即抢购</Button>
+              <Button type="warning" size="large" shape="circle" @click="jumpBuy">立即抢购</Button>
             </div>
           </div>
         </div>
@@ -101,6 +101,8 @@ export default {
   name: 'Detail',
   data () {
     return {
+      text: window.localStorage.getItem('addressText'),
+      phone: window.localStorage.getItem('phone'),
       search: '',
       value: 0,
       name: '探鱼（Cityon熙地港店）',
@@ -129,6 +131,10 @@ export default {
   methods: {
     jumpMoreDetail() {
       this.$router.push({ name: 'MoreDetail' });
+    },
+    //   跳到下单页面
+    jumpBuy() {
+      this.$router.push({ name: 'Buy', query:{ 'num' : 1 }});
     },
   }
 }

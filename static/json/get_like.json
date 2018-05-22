@@ -1,56 +1,102 @@
 [
     {
         "id": 1,
+        "name":"龙继斑火锅鱼",
+        "grade":4,
+        "evaluate":3604,
+        "img":"/static/img/huoguo1.png",
+        "address":"临潼区",
+        "price":120,
+        "category":"火锅"
+    },
+    {
+        "id": 2,
+        "name":"探鱼（熙地港店）",
+        "grade":3,
+        "evaluate":399,
+        "img":"/static/img/tuangoudetail1.png",
+        "address":"临潼区",
+        "price":100,
+        "category":"川菜"
+    },
+    {
+        "id": 3,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
-        "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "evaluate":299,
+        "img":"/static/img/mengguo1.png",
+        "address":"临潼区",
+        "price":20,
+        "category":"火锅"
+    },
+    {
+        "id": 4,
+        "name":"探鱼（熙地港店）",
+        "grade":3.8,
+        "evaluate":239,
+        "img":"/static/img/huoguo12.png",
+        "address":"未央区",
+        "price":40,
+        "category":"火锅"
+    },
+    {
+        "id": 5,
+        "name":"探鱼（熙地港店）",
+        "grade":4,
+        "evaluate":299,
+        "img":"/static/img/menguo2.png",
+        "address":"雁塔区",
+        "price":30,
+        "category":"川菜"
     },
     {
         "id": 1,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
-        "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "evaluate":239,
+        "img":"/static/img/menguo2.png",
+        "address":"临潼区",
+        "price":20,
+        "category":"川菜"
     },
     {
         "id": 1,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
-        "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "evaluate":399,
+        "img":"/static/img/huoguo12.png",
+        "address":"临潼区",
+        "price":20,
+        "category":"川菜"
     },
     {
         "id": 1,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
+        "evaluate":299,
         "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "address":"未央区",
+        "price":20,
+        "category":"川菜"
     },
     {
         "id": 1,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
-        "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "evaluate":299,
+        "img":"/static/img/mengguo1.png",
+        "address":"未央区",
+        "price":90,
+        "category":"川菜"
     },
     {
         "id": 1,
         "name":"探鱼（熙地港店）",
         "grade":4,
-        "evaluate":2399,
+        "evaluate":239,
         "img":"/static/img/tuangoudetail1.png",
-        "address":"未央路",
-        "price":20
+        "address":"雁塔区",
+        "price":50,
+        "category":"川菜"
     }
 ]

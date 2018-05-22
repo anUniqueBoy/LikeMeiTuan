@@ -3,8 +3,8 @@
     <div class="header">
       <div class="header-left">
         <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
-        <p style="margin-right:20px">西安</p>
-        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <p style="margin-right:20px">{{text}}</p>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">{{phone}}</router-link>
         <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
       <ul class="header-right">
@@ -138,6 +138,8 @@ export default {
   name: 'MoreDetail',
   data () {
     return {
+        text: window.localStorage.getItem('addressText'),
+        phone: window.localStorage.getItem('phone'),
         title: '探鱼',
         titleMore:'2人套餐A，提供免费wifi',
         number: '234',

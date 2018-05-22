@@ -11,7 +11,7 @@
           <h2 class="login-h2">欢迎注册</h2>
           <div class="login-form">
             <Form :model="formItem" ref="formItem" :rules="ruleItem" :label-width="80">
-              <FormItem prop="phone" label="用户名：">
+              <FormItem prop="phone" label="手机号：">
                 <Input type="text" v-model="formItem.phone" size="large" placeholder="请输入手机号"></Input>
               </FormItem>
               <FormItem prop="password" label="密码：">
@@ -47,8 +47,8 @@ export default {
   data () {
     return {
       formItem: {
-        phone: '18829788145',
-        password: '123456',
+        phone: '',
+        password: '',
         code: '',
       },
       codeNum: 1,
@@ -70,7 +70,8 @@ export default {
         if (valid) {
           let lowCode = this.formItem.code.toLowerCase();
           if (lowCode === '3n3d' || lowCode === '7wob' || lowCode === 'dwse') {
-            this.$router.push({ name: 'Home' });
+            this.register()
+            // this.$router.push({ name: 'Home' });
           } else if (lowCode === ''){
             this.$Message.warning('请输入验证码');
           } else {
@@ -89,6 +90,18 @@ export default {
       } else if (this.codeNum === 3) {
         this.codeNum = 1
       }
+    },
+    register(){
+      this.$http.post('http://127.0.0.1/php/register.php',{
+          uname:this.formItem.phone,
+          upwd:this.formItem.password
+        })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
   }
 }

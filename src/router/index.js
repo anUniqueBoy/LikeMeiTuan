@@ -11,6 +11,7 @@ import MoreDetail from '@/components/more-detail'
 import Buy from '@/components/buy'
 import OrderDetail from '@/components/order-detail'
 import ChangePwd from '@/components/change-pwd'
+import ChooseCity from '@/components/choose-city'
 
 
 Vue.use(Router)
@@ -104,6 +105,14 @@ export default new Router({
         title: '修改密码',
       },
       component: ChangePwd
+    },
+    {
+      path: '/ChooseCity',
+      name: 'ChooseCity',
+      meta: {
+        title: '选择城市',
+      },
+      component: ChooseCity
     },
   ]
 })

@@ -3,8 +3,15 @@
     <div class="header">
       <div class="header-left">
         <img src="../assets/local.png" alt="" style="margin-right:5px;height:30px;margin-top:3px;">
-        <p style="margin-right:20px">西安</p>
-        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">18829788145</router-link>
+        <div style="margin-right:20px;" class="show-adr">
+          <p>{{ text }}</p>
+          <p style="margin-left:8px;">
+            <Cascader :data="data" @on-change="handleChange">
+              <a href="javascript:void(0)">[修改地址]</a>
+            </Cascader>
+          </p>
+        </div>
+        <router-link to="/PersonalCenter" style="margin-right:10px;color:#31BBAC;">{{phone}}</router-link>
         <router-link to="/" style="color:#999999;">退出登录></router-link>
       </div>
       <ul class="header-right">
@@ -17,7 +24,7 @@
         <Row>
         <Col span="5">
           <ul class="left-header">
-            <li>全部分类</li>
+            <li class="left-first">全部分类</li>
           </ul>
         </Col>
         <Col span="19">
@@ -60,7 +67,7 @@
         </Carousel>
       </div>
     </div>
-    <div class="select-content" v-if="showChoose">
+    <div class="select-content">
       <ul class="select-header">
         <li v-for="(item,index) in selectItem" :key="index" @click="changeActive(index)" :class="item.isActive?'active-item':''">
           {{item.name}}
@@ -70,37 +77,11 @@
         <div class="item-container">
           <div class="item" @click="jumpDetail" v-for="(item,index) in foodList" :key=index>
             <div>
-              <img class="img-size" src="../assets/tanyu.png" alt="">
-            </div>
-            <div style="text-align:left">
-              <p class="font-first">{{item.name}}</p>
-              <Rate show-text disabled allow-half v-model="valueHalf">
-                <span class="font-second">{{item.evaluate}}个评价</span>
-              </Rate>
-              <p class="font-second">{{item.address}}</p>
-              <span class="font-price">￥{{item.price}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="footer">
-          <Page :total="100" show-total></Page>
-        </div>
-      </div>
-    </div>
-    <div class="cai-content">
-      <div class="cai-header">
-        <span style="font-size:23px;padding:20px">猜你喜欢</span>
-        <span style="font-size:15px">为你挑选最适合的</span>
-      </div>
-      <div class="show-container">
-        <div class="item-container">
-          <div class="item" @click="jumpDetail" v-for="(item,index) in foodList" :key=index>
-            <div>
               <img class="img-size" :src="item.img" alt="">
             </div>
             <div style="text-align:left">
               <p class="font-first">{{item.name}}</p>
-              <Rate show-text disabled allow-half v-model="valueHalf">
+              <Rate show-text disabled allow-half v-model="item.grade">
                 <span class="font-second">{{item.evaluate}}个评价</span>
               </Rate>
               <p class="font-second">{{item.address}}</p>
@@ -108,8 +89,8 @@
             </div>
           </div>
         </div>
-        <div class="footer">
-          <Page :total="100" show-total></Page>
+        <div  v-if="showPagination" class="footer">
+          <Page :total="totalCount" :page-size="pageSize" show-total @on-change="doPaging"></Page>
         </div>
       </div>
     </div>
@@ -117,15 +98,35 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'Home',
   data () {
     return {
+      text: window.localStorage.getItem('addressText'),
+      phone: window.localStorage.getItem('phone'),
+      data: [
+        {
+          value: 'xian',
+          label: '西安',
+          children:[
+            {
+              value: 'yantaqu',
+              label: '雁塔区'
+            },
+            {
+              value: 'weiyangqu',
+              label: '未央区'
+            },
+            {
+              value: 'lintongqu',
+              label: '临潼区'
+            }
+          ]
+        }
+      ],
       search: '',
       value: 0,
-      valueHalf: 4.8,
-      showChoose: false,
+      // valueHalf: 4.8,
       chooseItem:[
         {
           name: '川菜',
@@ -170,13 +171,23 @@ export default {
           isActive: false
         },
       ],
-      foodList:''
+      foodList:'',
+      pageNum: 1, // 有关分页的数据
+      pageSize: 8,
+      totalCount: 0,
+      showPagination: false,
+      adressChoose: ''
     }
   },
   mounted() {
-    this.getLikeList()
+    this.showList()
   },
   methods: {
+    handleChange (value, selectedData) {
+      this.text = selectedData.map(o => o.label).join(', ');
+      window.localStorage.setItem('addressText',this.text);
+      this.showList();
+    },
     jumpPeosonalCenter() {
       this.$router.push({ name: 'PersonalCenter' });
     },
@@ -188,7 +199,7 @@ export default {
         let item = Number(i)
         if (item === index) {
           this.chooseItem[item].isActive = true
-          this.showChoose = true
+          console.log(this.chooseItem[item].name)
         }else {
           this.chooseItem[item].isActive = false
         }
@@ -199,6 +210,27 @@ export default {
         let item = Number(i)
         if (item === index) {
           this.selectItem[item].isActive = true
+          if(this.selectItem[item].name === '销量最高'){
+            this.foodList.sort((a,b)=>{
+                let value1 = a.evaluate
+                let value2 = b.evaluate
+                return value2-value1
+            })
+          }else if(this.selectItem[item].name === '价格最低'){
+            this.foodList.sort((a,b)=>{
+                let value1 = a.price
+                let value2 = b.price
+                return value1-value2
+            })
+          }else if(this.selectItem[item].name === '评价最高'){
+            this.foodList.sort((a,b)=>{
+                let value1 = a.grade
+                let value2 = b.grade
+                return value2-value1
+            })
+          }else{
+            this.showList()
+          }
         }else {
           this.selectItem[item].isActive = false
         }
@@ -206,15 +238,42 @@ export default {
     },
     // 获取json数据
     getLikeList() {
-      axios.get('../../../static/json/get_like.json')
+      let params = {
+        page_num: this.pageNum,
+        page_size: this.pageSize
+      }
+      this.$http.get('../../../static/json/get_like.json')
         .then((response) => {
-          this.foodList = response.data
-          console.log(this.foodList)
+          let arr = []
+          for(let index in response.data){
+            if(this.adressChoose === response.data[index].address){
+              arr.push(response.data[index])
+            }
+          }
+          this.foodList = arr
+          this.totalCount = response.total
+          this.showPagination = true
         })
         .catch((error) => {
           console.log(error);
         })
     },
+    // 从地区的改变从而改变饭店的显示
+    showList() {
+      if(this.text === '西安, 未央区'){
+        this.adressChoose = '未央区'
+        this.getLikeList()
+      }else if(this.text === '西安, 雁塔区'){
+        this.adressChoose = '雁塔区'
+        this.getLikeList()
+      }else if(this.text === '西安, 临潼区'){
+        this.adressChoose = '临潼区'
+        this.getLikeList()
+      }
+    },
+    doPaging(){
+      console.log(111)
+    }
   }
 }
 </script>
@@ -228,6 +287,11 @@ export default {
     right: 0;
     left: 0;
     background-color: #F8F8F8;
+  }
+  .show-adr{
+    display: flex;
+    /* justify-content:space-between; */
+    align-items: center;
   }
   .header{
     width: 100%;
